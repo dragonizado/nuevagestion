@@ -3,6 +3,9 @@
 * Dragonizado 2018
 */
 
+define('_DEFAULTFOLDER_TEMPLATE_',$templatefolder);
+define('APIKEY',$apikey);
+
 // se define un entorno (desarrollo o producción)
 define('ENVIRONMENT', $environment);
 if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev') {
@@ -12,7 +15,7 @@ if (ENVIRONMENT == 'development' || ENVIRONMENT == 'dev') {
 
 // se crea una constante para crear una url global que dependa del hosting y que sea dinamica
 define('URL_PUBLIC_FOLDER', 'public');
-define('URL_PROTOCOL', '//');
+define('URL_PROTOCOL', 'http://');
 define('URL_DOMAIN', $_SERVER['HTTP_HOST']);
 define('URL_SUB_FOLDER', str_replace(URL_PUBLIC_FOLDER, '', dirname($_SERVER['SCRIPT_NAME'])));
 define('URL', URL_PROTOCOL . URL_DOMAIN . URL_SUB_FOLDER);

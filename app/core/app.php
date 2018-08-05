@@ -32,12 +32,12 @@
 		                    // no action defined: call the default index() method of a selected controller
 		                    $this->url_controller->index();
 		                }else{
-		                    header('location: ' . URL . 'problem');
+		                    header('location: ' . URL . 'public/index.php?problem2='.$_GET['url']);
 		                }
 				   }
 
 			}else{
-				 header('location: ' . URL . 'problem');
+				 header('location: ' . URL . 'public/index.php?problem='.$_GET['url']);
 			}
 
 		}
@@ -48,7 +48,7 @@
 	            $url = filter_var($url, FILTER_SANITIZE_URL);
 	            $url = explode('/', $url);
 
-	            $this->url_controller = isset($url[0]) ? $url[0] : null;
+	            $this->url_controller = isset($url[0]) ? $url[0].'Controller': null;
             	$this->url_action = isset($url[1]) ? $url[1] : null;
 
             	unset($url[0], $url[1]);
