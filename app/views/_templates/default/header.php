@@ -6,6 +6,7 @@
 	<title><?=$this->pageName;?></title>
 	<style>#loader{transition:all .3s ease-in-out;opacity:1;visibility:visible;position:fixed;height:100vh;width:100%;background:#fff;z-index:90000}#loader.fadeOut{opacity:0;visibility:hidden}.spinner{width:40px;height:40px;position:absolute;top:calc(50% - 20px);left:calc(50% - 20px);background-color:#333;border-radius:100%;-webkit-animation:sk-scaleout 1s infinite ease-in-out;animation:sk-scaleout 1s infinite ease-in-out}@-webkit-keyframes sk-scaleout{0%{-webkit-transform:scale(0)}100%{-webkit-transform:scale(1);opacity:0}}@keyframes sk-scaleout{0%{-webkit-transform:scale(0);transform:scale(0)}100%{-webkit-transform:scale(1);transform:scale(1);opacity:0}}</style>
 	<link href="<?=URL;?>public/css/themes/style.css" rel="stylesheet">
+	<script type="text/javascript" src="<?=URL;?>public/js/jquery3.3.1/jquery-3.3.1.js"></script>
 </head>
 <body class="app">
 	<div id="loader">
@@ -45,30 +46,18 @@
 				</div>
 			</div>
 			<ul class="sidebar-menu scrollable pos-r">
-				<li class="nav-item mT-30 active">
-					<a class="sidebar-link" href="#">
-						<span class="icon-holder">
-							<i class="c-blue-500 ti-home"></i> 
-						</span>
-						<span class="title">Dashboard</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="sidebar-link" href="<?=URL?>public/index.php?url=default/signin">
-						<span class="icon-holder">
-							<i class="c-deep-orange-500 ti-user"></i> 
-						</span>
-						<span class="title">Usuarios</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="sidebar-link" href="#">
-						<span class="icon-holder">
-							<i class="c-blue-500 ti-share"></i> 
-						</span>
-						<span class="title">Herramientas</span>
-					</a>
-				</li>
+				<!-- if 1=SuperAdmin 2= Admin 3= tecnical -->
+				<?php 
+					if ($_SESSION['rol'] == '1'){
+						include "menu/superAdmin/menu.php";
+					}else if($_SESSION['rol'] == '2'){
+						include "menu/admin/menu.php";
+					}else if($_SESSION['rol'] == '3'){
+						include "menu/tecnico/menu.php";
+					}
+
+				 ?>
+			
 				<!-- <li class="nav-item">
 					<a class="sidebar-link" href="calendar.html">
 						<span class="icon-holder">
@@ -403,19 +392,19 @@
 									
 								<ul class="dropdown-menu fsz-sm">
 									<li>
-										<a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+										<a href="#" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
 											<i class="ti-settings mR-10"></i> 
-											<span>Configuracion</span>
+											<span>Configuración</span>
 										</a>
 									</li>
 									<li>
-										<a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+										<a href="#" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
 											<i class="ti-user mR-10"></i> 
 											<span>Perfil</span>
 										</a>
 									</li>
 									<li>
-										<a href="email.html" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+										<a href="#" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
 											<i class="ti-email mR-10"></i> 
 											<span>Mensajes</span>
 										</a>

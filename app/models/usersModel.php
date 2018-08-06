@@ -83,8 +83,37 @@ class UsersModel
 		$query->execute($params);
 	}
 
+	public function searchById($id){
+		$sql = "SELECT * FROM users WHERE id=:id";
+		$query = $this->_db->prepare($sql);
+		$parametros = array(
+			":id"=>$id
+		);
+		$query->execute($parametros);
+		$response = $query->fetch();
+
+		$this->__SET('id',$response->id);
+		$this->__SET('usuario',$response->usuario);
+		$this->__SET('contra',$response->contra);
+		$this->__SET('nombre',$response->nombre);
+		$this->__SET('apellido',$response->apellido);
+		$this->__SET('correo',$response->correo);
+		$this->__SET('documento',$response->documento);
+		$this->__SET('estado',$response->estado);
+		$this->__SET('rol_id',$response->rol_id);
+	
+		return $response;
+	}
+
 	public function getAllUsers(){
 		$sql="SELECT * FROM users WHERE id!= 1 AND documento != 123456789";
+		$query = $this->_db->prepare($sql);
+		$query->execute();
+		return $query->fetchAll();
+	}
+
+	public function getAllTecnicalUsers(){
+		$sql="SELECT * FROM users WHERE rol_id = 3";
 		$query = $this->_db->prepare($sql);
 		$query->execute();
 		return $query->fetchAll();

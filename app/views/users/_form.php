@@ -43,17 +43,17 @@
 		<div class="form-group col-md-4">
 			<label for="inputRol">Rol: <span style="color:red;">*</span></label> 
 			<select id="inputRol" name="rol" class="form-control" value="<?=$rol;?>" required>
-				<option value="3" <?php ($id == '' && $rol == '3' )?'selected="selected"':''; ?> >Tecnico</option>
-				<option value="2" <?php ($id == '' && $rol == '2' )?'selected="selected"':''; ?> >Administrador</option>
-				<option value="1" <?php ($id == '' && $rol == '1' )?'selected="selected"':''; ?> >SuperAdministrador</option>
+				<option value="3" <?php echo ($id != '' && $rol == '3' )?'selected="selected"':''; ?> >Tecnico</option>
+				<option value="2" <?php echo ($id != '' && $rol == '2' )?'selected="selected"':''; ?> >Administrador</option>
 			</select>
-		</div><?php ($estado == 'INACTIVO')?'p':'1'; ?>d
+		</div>
+
 		<div class="form-group col-md-4">
 			<label for="inputState">Estado: <span style="color:red;">*</span></label> 
 			<select id="inputState" name="state" class="form-control" value="<?=$estado;?>" required>
-				<option value="ACTIVO" <?php ($estado == 'ACTIVO' )?'p':'1'; ?> >Activo</option>
-				<option value="INACTIVO" <?php ($estado == 'INACTIVO' )?'p':'3'; ?> >Sin activar</option>
-				<option value="DESHABILITADO" <?php ($estado == 'DESHABILITADO' )?'p':'2'; ?> >Deshabilitado</option>
+				<option value="ACTIVO" <?php echo ($id != '' && $estado == 'ACTIVO' )?'selected="selected"':''; ?> >Activo</option>
+				<option value="INACTIVO" <?php echo ($id != '' && $estado == 'INACTIVO' )?'selected="selected"':''; ?> >Sin activar</option>
+				<option value="DESHABILITADO" <?php echo ($id != '' && $estado == 'DESHABILITADO' )?'selected="selected"':''; ?> >Deshabilitado</option>
 			</select>
 		</div>
 	</div>

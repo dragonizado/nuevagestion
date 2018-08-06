@@ -10,9 +10,9 @@
 			<table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						<th>id</th>
 						<th>Nombre</th>
 						<th>Documento</th>
+						<th>correo</th>
 						<th>Rol</th>
 						<th>Estado</th>
 						<th>Opciones</th>

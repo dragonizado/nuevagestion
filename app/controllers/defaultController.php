@@ -2,18 +2,7 @@
 class defaultController extends controller{
 
 	private $model = null;
-	private $model_A = null;
-	private $model_B = null;
-	private $model_C = null;
-	private $model_D = null;
-	private $model_E = null;
-	private $model_F = null;
-	private $model_G = null;
-	private $model_H = null;
 	private $model_user = null;
-	private $model_u_matches = null;
-	protected $model_group = null;
-	private $model_phases = null;
 	protected $loginErrors = null;
 	protected $formErrors = null;
 	protected $nombrecompleto = null;
@@ -36,8 +25,10 @@ class defaultController extends controller{
 		$this->pageName="Pagina Principal";
 		$usuario_id = $_SESSION['id'];
 		$user_rol = $_SESSION['rol'];
-		
-		$this->view('default/index');
+
+		$this->view('default/index',array(
+			"rol"=>$user_rol
+		));
 	
 
 	}
@@ -67,6 +58,7 @@ class defaultController extends controller{
 				$_SESSION['username'] = $usersession->usuario;
 				$_SESSION['firstname'] = $usersession->nombre;
 				$_SESSION['lastname'] = $usersession->apellido;
+				$_SESSION['login_name'] = $usersession->nombre ." ".$usersession->apellido;
 				$_SESSION['rol'] = $usersession->rol_id;
 				header("location: ".URL."public/index.php?url=default/index");
 			}else{
@@ -105,7 +97,8 @@ class defaultController extends controller{
 
 		//edit
 		if(isset($_GET['id']) && $_GET['id'] != null){
-			$this->model_user->__SET('id',$_GET['id']);
+			// $this->model_user->__SET('id',$_GET['id']);
+			 $this->model_user->searchById($_GET['id']);
 			if(isset($_POST['btn-save'])){
 				// Cargar el modelo para guardar la edicion
 				$this->model_user->__SET("usuario",$_POST['nickname']);
@@ -150,10 +143,16 @@ class defaultController extends controller{
 		if ($model) {
 			foreach ($model as $key => $user) {
 				$table .= '<tr>';
-				$table .= '<td>'.$user->id.'</td>';
-				$table .= '<td>'.$user->nombre.'</td>';
-				$table .= '<td>'.$user->apellido.'</td>';
-				$table .= '<td>'.$user->rol_id.'</td>';
+				$table .= '<td>'.$user->nombre.' '.$user->apellido.'</td>';
+				$table .= '<td>'.$user->documento.'</td>';
+				$table .= '<td>'.$user->correo.'</td>';
+				if ($user->rol_id == "1") {
+					$table .= '<td>Super Admin</td>';
+				}else if($user->rol_id == "2"){
+					$table .= '<td>Administrador</td>';
+				}else if($user->rol_id == "3"){
+					$table .= '<td>Tecnico</td>';
+				}
 				$table .= '<td>'.$user->estado.'</td>';
 				$table .= '<td><a href="'.URL.'public/index.php?url=default/signin&id='.$user->id.'"><button class="btn btn-info">Editar</button></a></td>';
 				$table .= '</tr>';
