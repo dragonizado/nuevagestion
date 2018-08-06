@@ -36,7 +36,7 @@ class UsersModel
 	}
 
 	public function create(){
-		$sql = "INSERT INTO users (usuario,contra,nombre,apellido,correo,estado,rol_id) VALUES (:usuario,:contra,:nombre,:apellido,:correo,:estado,:rol_id)";
+		$sql = "INSERT INTO users (usuario,contra,nombre,apellido,correo,documento,estado,rol_id) VALUES (:usuario,:contra,:nombre,:apellido,:correo,:documento,:estado,:rol_id)";
 		$query = $this->_db->prepare($sql);
 		$params = array(
 			':usuario'=>$this->usuario,

@@ -101,7 +101,9 @@ class toolsModel
 			':creacion_registro'=>$this->creacion_registro,
 			':fecha_modificacion'=>$this->fecha_modificacion,
 		);
-		return $query->execute($parameters);
+		$result = $query->execute($parameters);
+		$this->clearattr();
+		return $result;
 	}
 
 	public function getAllTools(){
@@ -112,7 +114,7 @@ class toolsModel
 	}
 
 	public function getAllTools_out_user($id){
-		$sql = "SELECT * FROM tools WHERE tecnico != :id";
+		$sql = "SELECT * FROM tools WHERE tecnico != :id  OR tecnico != 0";
 		$query = $this->_db->prepare($sql);
 		$parameters = array(
 			":id"=>$id
@@ -129,6 +131,28 @@ class toolsModel
 		);
 		$query->execute($parameters);
 		return $query->fetchAll();
+	}
+
+	private function clearattr(){
+		$this->stage = null;
+		$this->sql = null;
+		$this->id = null;
+		$this->nombre = null;
+		$this->tipo = null;
+		$this->fabricante = null;
+		$this->modelo = null;
+		$this->n_serie = null;
+		$this->n_inventario = null;
+		$this->tecnico = null;
+		$this->estado_herr = null;
+		$this->estado_posi = null;
+		$this->ubicacion_actual = null;
+		$this->fecha_compra = null;
+		$this->fecha_mto = null;
+		$this->fecha_salida = null;
+		$this->descripcion = null;
+		$this->creacion_registro = null;
+		$this->fecha_modificacion = null;
 	}
 
 

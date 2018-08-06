@@ -8,39 +8,41 @@
 		<div class="bgc-white p-20 bd">
 			<h3><i class="fa fa-suitcase" aria-hidden="true"></i> Administrador de herramientas</h3>
 			<hr>
-			<table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-				<thead>
-					<tr>
-						<th>Nombre</th>
-						<th>Tecnico a cargo</th>
-						<th>Ubicación actual</th>
-						<th>Fecha Salida</th>
-						<th>Opciones</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-					foreach ($tbody as $key => $body) {
-						$this->model_users->__SET('id',$body->tecnico);
-						$this->model_locations->__SET('id',$body->ubicacion_actual);
-						$tecnico = $this->model_users->getUser();
-						$localizacion = $this->model_locations->getLocation();
-						echo '<tr>';
-						echo 	'<td>'.$body->nombre.'</td>';
-						if ($tecnico) {
-							echo 	'<td style="text-transform:uppercase;">'.$tecnico->nombre." ".$tecnico->apellido.'</td>';
-						}else{
-							echo 	'<td style="text-transform:uppercase;">Sin técnico</td>';
+			<div class="table-responsive">
+				<table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Tecnico a cargo</th>
+							<th>Ubicación actual</th>
+							<th>Fecha Salida</th>
+							<th>Opciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						foreach ($tbody as $key => $body) {
+							$this->model_users->__SET('id',$body->tecnico);
+							$this->model_locations->__SET('id',$body->ubicacion_actual);
+							$tecnico = $this->model_users->getUser();
+							$localizacion = $this->model_locations->getLocation();
+							echo '<tr>';
+							echo 	'<td>'.$body->nombre.'</td>';
+							if ($tecnico) {
+								echo 	'<td style="text-transform:uppercase;">'.$tecnico->nombre." ".$tecnico->apellido.'</td>';
+							}else{
+								echo 	'<td style="text-transform:uppercase;">Sin técnico</td>';
+							}
+							echo 	'<td style="text-transform:uppercase;">'.$localizacion->descripcion.'</td>';
+							echo 	'<td>'.$body->fecha_salida.'</td>';
+							echo 	'<td><a href="'.URL.'public/index.php?url=tools/edit&id='.$body->id.'" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i></a> <button class="btn btn-dark loadTool" data-ajaxid="'.$body->id.'"><i class="fa fa-info-circle" aria-hidden="true"></i>
+	</button></td>';
+							echo '</tr>';
 						}
-						echo 	'<td style="text-transform:uppercase;">'.$localizacion->descripcion.'</td>';
-						echo 	'<td>'.$body->fecha_salida.'</td>';
-						echo 	'<td><a href="'.URL.'public/index.php?url=tools/edit&id='.$body->id.'" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i></a> <button class="btn btn-dark loadTool" data-ajaxid="'.$body->id.'"><i class="fa fa-info-circle" aria-hidden="true"></i>
-</button></td>';
-						echo '</tr>';
-					}
-					?>
-				</tbody> 
-			</table>
+						?>
+					</tbody> 
+				</table>
+			</div>
 		</div>
 		<div class="bgc-white p-20 bd " id="infotool" style="margin-top:16px;">
 			<center><h3><i class="fa fa-info-circle" aria-hidden="true"></i> No se ha seleccionado una Herramienta</h3></center>

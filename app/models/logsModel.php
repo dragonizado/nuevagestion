@@ -14,12 +14,14 @@ class logsModel
 		}
 	}
 
-	public function register($id,$des){
-		$sql = "INSERT INTO logs (descripcion,user_id) VALUES (:des,:id)";
+	public function register($id,$tipo,$des){
+		$sql = "INSERT INTO logs (descripcion,user_id,tipo,creado) VALUES (:des,:id,:tipo,:creado)";
 		$query = $this->_db->prepare($sql);
 		$parameters = array(
 			":des"=>$des,
-			":id"=>$id
+			":id"=>$id,
+			"tipo"=>$tipo,
+			":creado"=>date("Y-m-d H:i:s"),
 		);
 		return $query->execute($parameters);
 	}

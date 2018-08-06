@@ -74,8 +74,6 @@ class defaultController extends controller{
 
 	public function signin(){
 		if(isset($_POST['document']) && isset($_POST['btn-register']) ){
-			echo "Registrar";
-			exit;
 			$this->model_user->__SET("usuario",$_POST['nickname']);
 			$this->model_user->__SET("documento",$_POST['document']);
 			$this->model_user->__SET("correo",$_POST['email']);
