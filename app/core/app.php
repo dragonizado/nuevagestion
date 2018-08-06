@@ -32,12 +32,12 @@
 		                    // no action defined: call the default index() method of a selected controller
 		                    $this->url_controller->index();
 		                }else{
-		                    header('location: ' . URL . 'public/index.php?problem2='.$_GET['url']);
+		                    header('location: ' . URL . 'public/index.php?url=problem');
 		                }
 				   }
 
 			}else{
-				 header('location: ' . URL . 'public/index.php?problem='.$_GET['url']);
+				 header('location: ' . URL . 'public/index.php?url=problem');
 			}
 
 		}

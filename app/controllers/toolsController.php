@@ -9,15 +9,18 @@ class toolsController extends Controller
 	protected $model_locations;
 	private $model_stateTools;
 	private $model_typeTools;
+	private $model_logs;
 	protected $nombrecompletos = null;
 	function __construct()
 	{
+		session_start();
+		$this->validateSesion();
 		$this->model = $this->cargarmodelo("tools");
 		$this->model_users = $this->cargarmodelo("users");
+		$this->model_logs = $this->cargarmodelo("logs");
 		$this->model_locations = $this->cargarmodelo("locations");
 		$this->model_stateTools = $this->cargarmodelo("statetools");
 		$this->model_typeTools = $this->cargarmodelo("typetools");
-		session_start();
 		if(isset($_SESSION['username'])){
 			$this->nombrecompleto = $_SESSION['firstname']." ".$_SESSION['lastname'];
 		}else{
@@ -51,7 +54,9 @@ class toolsController extends Controller
 			$this->model->__SET('descripcion',$_POST['observations']);
 			$this->model->__SET('creacion_registro',date('Y-m-d'));
 			
-			$this->model->save();
+			if($this->model->save()){
+				$this->model_logs->register($_SESSION['id'],"Ha creado una herramienta");
+			}
 
 			
 		}
@@ -65,6 +70,43 @@ class toolsController extends Controller
 			"model"=>$this->model,
 			"tbody"=>$this->model->getAllTools(),
 		));
+	}
+
+	public function register(){
+		if(isset($_POST['btn-register'])){
+			$this->model->searchById($_POST['Herramienta']);
+			$this->model->__SET('stage','update');
+			$this->model->__SET('ubicacion_actual',$_POST['ubicacion']);
+			$this->model->__SET('tecnico',$_SESSION['id']);
+			if ($_POST['ubicacion'] == "1") {
+				$this->model->__SET('estado_posi','Adentro');
+			}else{
+				$this->model->__SET('estado_posi','Afuera');
+				$this->model->__SET('fecha_salida',date("Y-m-d"));
+			}
+			if($this->model->save()){
+				$this->model_logs->register($_SESSION['id'],"Se ha asignado una herramienta");
+			}
+		}
+
+		$this->view("tools/register",array(
+			"herramientas"=>$this->model->getAllTools_out_user($_SESSION['id']),
+			"locations"=>$this->model_locations->getAlllocations(),
+			"tbody"=>$this->model->getAllTools_user($_SESSION['id']),
+		));
+	}
+
+	public function unregister(){
+		if (isset($_GET['id']) && $_GET['id'] != '') {
+			$this->model->searchById($_GET['id']);
+			$this->model->__SET('stage','update');
+			$this->model->__SET('tecnico',0);
+			$this->model->__SET('estado_posi','Adentro');
+			if($this->model->save()){
+				$this->model_logs->register($_SESSION['id'],"Ha dejado una herramienta");
+				header("location: ".URL."public/index.php?url=tools/register");
+			}
+		}
 	}
 
 	public function edit(){
@@ -95,6 +137,7 @@ class toolsController extends Controller
 					$this->model->__SET('descripcion',$_POST['observations']);
 					$this->model->__SET('fecha_modificacion',date('Y-m-d'));
 					if($this->model->save()){
+						$this->model_logs->register($_SESSION['id'],"Ha editado una herramienta");
 						header("location: ".URL."public/index.php?url=tools/create");
 					}else{
 						echo "No se guardo la actualización";

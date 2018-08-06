@@ -111,6 +111,27 @@ class toolsModel
 		return $query->fetchAll();
 	}
 
+	public function getAllTools_out_user($id){
+		$sql = "SELECT * FROM tools WHERE tecnico != :id";
+		$query = $this->_db->prepare($sql);
+		$parameters = array(
+			":id"=>$id
+		);
+		$query->execute($parameters);
+		return $query->fetchAll();
+	}
+
+	public function getAllTools_user($id){
+		$sql = "SELECT * FROM tools WHERE tecnico = :id";
+		$query = $this->_db->prepare($sql);
+		$parameters = array(
+			":id"=>$id
+		);
+		$query->execute($parameters);
+		return $query->fetchAll();
+	}
+
+
 
 }
  ?>

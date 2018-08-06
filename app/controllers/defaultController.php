@@ -21,11 +21,14 @@ class defaultController extends controller{
 	public function index(){
 		// session_start();
 		$this->validateSesion();
-		
 		$this->pageName="Pagina Principal";
 		$usuario_id = $_SESSION['id'];
 		$user_rol = $_SESSION['rol'];
 
+		if($user_rol == "3"){
+			header("location: ".URL."public/index.php?url=tools/register");
+		}
+		
 		$this->view('default/index',array(
 			"rol"=>$user_rol
 		));
