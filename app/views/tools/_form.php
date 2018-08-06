@@ -28,8 +28,8 @@
 			<div class="form-group">
 				<label for="">Estado herramienta: <span style="color:red;">*</span></label>
 				<div class="input-group">
-					<select name="es_her" id="" class="form-control">
-						<option value="" >Seleccione una opción</option>
+					<select name="es_her" id="" class="form-control" required>
+						<option value="" disabled selected>Seleccione una opción</option>
 						<option value="Bueno" <?php echo ($id != '' && $model->estado_herr=='Bueno')?'selected="selected"':''; ?>>Bueno</option>
 						<option value="Regular" <?php echo ($id != '' && $model->estado_herr=='Regular')?'selected="selected"':''; ?>>Regular</option>
 						<option value="Mantenimiento" <?php echo ($id != '' && $model->estado_herr=='Mantenimiento')?'selected="selected"':''; ?>>Mantenimiento</option>
