@@ -2,11 +2,12 @@
 /**
  * Dragonizado
  */
-class logsModel
+class logsModel extends Model
 {
 	
 	function __construct($db)
 	{
+		date_default_timezone_set('America/Bogota');
 		try {
 			$this->_db = $db;
 		} catch (PDOException $e) {
@@ -24,6 +25,10 @@ class logsModel
 			":creado"=>date("Y-m-d H:i:s"),
 		);
 		return $query->execute($parameters);
+	}
+
+	public function model($parameters = null,$className = __CLASS__){
+		return parent::searchSQL($parameters,$className);
 	}
 }
  ?>

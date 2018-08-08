@@ -2,7 +2,7 @@
 /**
  * Dragonizado 2018
  */
-class statetoolsModel
+class statetoolsModel extends Model
 {
 	private $id;
 	private $descripcion;
@@ -29,6 +29,19 @@ class statetoolsModel
 		$query = $this->_db->prepare($sql);
 		$query->execute();
 		return $query->fetchAll();
+	}
+
+	public function create(){
+		$sql="INSERT INTO statetools (descripcion) VALUES (:descripcion)";
+		$query = $this->_db->prepare($sql);
+		$parameters = array(
+			":descripcion"=>$this->descripcion,
+		);
+		return $query->execute($parameters);
+	}
+
+	public function model($parameters = null,$className = __CLASS__){
+		return parent::searchSQL($parameters,$className);
 	}
 }
 ?>

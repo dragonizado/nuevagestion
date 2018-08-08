@@ -16,6 +16,7 @@ require APP . 'config/dbcore.php';
 
 require APP . 'core/app.php';
 require APP . 'core/controller.php';
+require APP . 'core/model.php';
 
 
 $app = new app();

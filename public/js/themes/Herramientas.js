@@ -1,4 +1,3 @@
-var _url = window.location.pathname;
 $(".loadTool").click(function(){
 	let _obj = $(this);
 	let _id = _obj.data("ajaxid");

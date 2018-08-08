@@ -2,7 +2,7 @@
 /**
 * Dragonizado 2018
 */
-class UsersModel
+class UsersModel extends Model
 {
 	private $id = null;
 	private $usuario  = null;
@@ -164,6 +164,10 @@ class UsersModel
 			':documento'=>$value,
 		);
 		return $query->execute($params);
+	}
+
+	public function model($parameters=null,$className = __CLASS__){
+		return parent::searchSQL($parameters,$className);
 	}
 }
 

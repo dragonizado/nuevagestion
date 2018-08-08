@@ -28,7 +28,7 @@
 			<div class="form-group">
 				<label for="">Estado herramienta: <span style="color:red;">*</span></label>
 				<div class="input-group">
-					<select name="es_her" id="" class="form-control" required>
+					<select name="es_her" id="es_her" class="form-control" required>
 						<option value="" disabled selected>Seleccione una opción</option>
 						<option value="Bueno" <?php echo ($id != '' && $model->estado_herr=='Bueno')?'selected="selected"':''; ?>>Bueno</option>
 						<option value="Regular" <?php echo ($id != '' && $model->estado_herr=='Regular')?'selected="selected"':''; ?>>Regular</option>
@@ -45,7 +45,9 @@
 						 ?>
 					</select>
 					<div class="input-group-prepend">
-						<a href="#" class="btn btn-primary">+</a>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mstagetools">
+							<i class="fa fa-plus-circle" aria-hidden="true"></i>
+						</button>
 			        </div>
 				</div>
 				
@@ -63,7 +65,7 @@
 			<div class="form-group">
 				<label for="">Tipo:</label>
 				<div class="input-group">
-					<select name="type" id="" class="form-control">
+					<select name="type" id="type" class="form-control">
 						<option value="">Seleccione una opción</option>
 						<?php 
 							foreach ($types as $key => $type) {
@@ -76,7 +78,9 @@
 						 ?>
 					</select>
 					<div class="input-group-prepend">
-						<a href="#" class="btn btn-primary">+</a>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mtypetool">
+							<i class="fa fa-plus-circle" aria-hidden="true"></i>
+						</button>
 			        </div>
 				</div>
 			</div>
@@ -90,7 +94,7 @@
 			</div>
 			<div class="form-group">
 				<label for="">Nº Serie:</label>
-				<input type="number" name="n_serie" class="form-control" value="<?=$model->n_serie;?>">
+				<input type="text" name="n_serie" class="form-control" value="<?=$model->n_serie;?>">
 			</div>
 			<div class="form-group">
 				<label for="">Nº Inventario:</label>
@@ -111,9 +115,9 @@
 							}
 						 ?>
 					</select>
-					<div class="input-group-prepend">
+					<!-- <div class="input-group-prepend">
 						<a href="<?=URL;?>public/index.php?url=default/signin" class="btn btn-primary">+</a>
-			        </div>
+			        </div> -->
 				</div>
 			</div>
 		</div>
@@ -125,7 +129,7 @@
 				<div class="form-group">
 				<label for="">Ubicación actual:</label>
 				<div class="input-group">
-					<select name="Current_location" id="" class="form-control">
+					<select name="Current_location" id="Current_location" class="form-control">
 						
 						<?php 
 							foreach ($locations as $key => $location) {
@@ -138,7 +142,9 @@
 						 ?>
 					</select>
 					<div class="input-group-prepend">
-						<a href="#" class="btn btn-primary">+</a>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mcurrentlocation">
+							<i class="fa fa-plus-circle" aria-hidden="true"></i>
+						</button>
 			        </div>
 				</div>
 			</div>

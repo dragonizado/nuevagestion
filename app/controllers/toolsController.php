@@ -55,7 +55,7 @@ class toolsController extends Controller
 			$this->model->__SET('creacion_registro',date('Y-m-d'));
 			
 			if($this->model->save()){
-				$this->model_logs->register($_SESSION['id'],"notificacion","Ha creado una herramienta");
+				$this->model_logs->register($_SESSION['id'],"creacion","Ha creado una herramienta");
 			}
 
 			
@@ -85,7 +85,7 @@ class toolsController extends Controller
 				$this->model->__SET('fecha_salida',date("Y-m-d"));
 			}
 			if($this->model->save()){
-				$this->model_logs->register($_SESSION['id'],"notificacion","Se ha asignado una herramienta");
+				$this->model_logs->register($_SESSION['id'],"asignacion","Se ha asignado una herramienta");
 			}
 		}
 
@@ -103,7 +103,7 @@ class toolsController extends Controller
 			$this->model->__SET('tecnico',0);
 			$this->model->__SET('estado_posi','Adentro');
 			if($this->model->save()){
-				$this->model_logs->register($_SESSION['id'],"notificacion","Ha dejado una herramienta");
+				$this->model_logs->register($_SESSION['id'],"desasignacion","Ha dejado una herramienta");
 				header("location: ".URL."public/index.php?url=tools/register");
 			}
 		}
@@ -137,7 +137,7 @@ class toolsController extends Controller
 					$this->model->__SET('descripcion',$_POST['observations']);
 					$this->model->__SET('fecha_modificacion',date('Y-m-d'));
 					if($this->model->save()){
-						$this->model_logs->register($_SESSION['id'],"notificacion","Ha editado una herramienta");
+						$this->model_logs->register($_SESSION['id'],"edicion","Ha editado una herramienta");
 						header("location: ".URL."public/index.php?url=tools/create");
 					}else{
 						echo "No se guardo la actualización";
@@ -170,6 +170,30 @@ class toolsController extends Controller
 			echo "Solicitud Errada";
 		}
 
+	}
+
+	public function ajax_Rstage(){
+		$this->validateAjaxPOST();
+		$this->model_stateTools->__SET("descripcion",$_POST['description']);
+		$this->model_logs->register($_SESSION['id'],"creacion","Ha creado un estado.");
+		echo json_encode($this->model_stateTools->create());
+	}
+
+	public function ajax_Rtype(){
+		$this->validateAjaxPOST();
+		$this->model_typeTools->__SET("descripcion",$_POST['description']);
+		$this->model_logs->register($_SESSION['id'],"creacion","Ha registrado un tipo de herramienta");
+		echo json_encode($this->model_typeTools->create());
+	}
+
+	public function ajax_Rlocation(){
+		$this->validateAjaxPOST();
+		$this->model_locations->__SET('descripcion',$_POST['description']);
+		$response = array();
+		$response['stage'] = $this->model_locations->create();
+		$response['ident'] = $this->model_locations->__GET("id");
+		$this->model_logs->register($_SESSION['id'],"creacion","Ha registrado una localización");
+		echo json_encode($response);
 	}
 }
  ?>

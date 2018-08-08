@@ -2,7 +2,7 @@
 /**
  * Dragonizado 2018
  */
-class locationsModel
+class locationsModel extends Model
 {
 	private $id;
 	private $descripcion;
@@ -37,6 +37,21 @@ class locationsModel
 		$parametros = array(":id"=>$this->id);
 		$query->execute($parametros);
 		return $query->fetch();
+	}
+
+	public function create(){
+		$sql = "INSERT INTO locations (descripcion) VALUES (:description)";
+		$query = $this->_db->prepare($sql);
+		$parameters = array(
+			":description"=>$this->descripcion,
+		);
+		$response = $query->execute($parameters);
+		$this->__SET("id",$this->_db->lastInsertId());
+		return $response;
+	}
+
+	public function model($parameters = null,$className = __CLASS__){
+		return parent::searchSQL($parameters,$className);
 	}
 }
 ?>

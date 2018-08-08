@@ -3,13 +3,18 @@ class defaultController extends controller{
 
 	private $model = null;
 	private $model_user = null;
+	private $model_tools = null;
+	private $model_logs = null;
 	protected $loginErrors = null;
 	protected $formErrors = null;
 	protected $nombrecompleto = null;
 
+
 	function __construct(){
 		$this->model = $this->cargarModelo("default");
 		$this->model_user = $this->cargarModelo("users");
+		$this->model_tools = $this->cargarModelo("tools");
+		$this->model_logs = $this->cargarModelo("logs");
 		session_start();
 			if(isset($_SESSION['username'])){
 				$this->nombrecompleto = $_SESSION['firstname']." ".$_SESSION['lastname'];
@@ -28,9 +33,14 @@ class defaultController extends controller{
 		if($user_rol == "3"){
 			header("location: ".URL."public/index.php?url=tools/register");
 		}
-		
 		$this->view('default/index',array(
-			"rol"=>$user_rol
+			"rol"=>$user_rol,
+			"total_tools"=>count($this->model_tools->model()),
+			"total_technical"=>count($this->model_user->model(array("condition"=>"rol_id = '3'"))),
+			"total_tools_inside"=>count($this->model_tools->model(array("condition"=>" estado_posi = 'Adentro' "))),
+			"total_tools_outside"=>count($this->model_tools->model(array("condition"=>" estado_posi = 'Afuera' "))),
+			"model_user"=>$this->model_user,
+			"model_logs"=>$this->model_logs,
 		));
 	
 

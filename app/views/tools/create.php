@@ -76,5 +76,6 @@
 		</div> -->
 	</div>
 </div>
+<?php include "_modals.php"; ?>
 <script type="text/javascript" src="<?=URL;?>public/js/themes/herramientas.js"></script>
 

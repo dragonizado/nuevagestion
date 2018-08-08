@@ -6,6 +6,6 @@
 		<?php else: ?>
 			<?php include "_partials/tecnico/index.php" ?>
 		<?php endif ?>
-		<div class="bgc-white">Pagina ---- contenido</div>
+	<!-- 	<div class="bgc-white">Pagina ---- contenido</div> -->
 	</div>
 </div>

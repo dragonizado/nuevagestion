@@ -2,7 +2,7 @@
 /**
  * Dragonizado
  */
-class toolsModel
+class toolsModel extends Model
 {
 
 	private $stage;
@@ -155,7 +155,9 @@ class toolsModel
 		$this->fecha_modificacion = null;
 	}
 
-
+	public function model($parameters=null, $className = __CLASS__){
+		return parent::searchSQL($parameters,$className);
+	}
 
 }
  ?>

@@ -90,6 +90,18 @@
 				return header("location: ".URL."public/index.php?url=default/login");		
 			}
 	    }
+
+	    public function validateAjaxPOST(){
+	    	if (!isset($_POST['ajax']) && $_POST['ajax'] != APIKEY) {
+	    		return exit("Solicitud incorrecta");
+	    	}
+	    }
+
+	    public function validateAjaxGET(){
+	    	if (!isset($_GET['ajax']) && $_GET['ajax'] != APIKEY) {
+	    		return exit("Solicitud incorrecta");
+	    	}
+	    }
 	}
 
  ?>
