@@ -2,7 +2,7 @@
 /**
 * Dragonizado 2018
 */
-class UsersModel extends Model
+class usersModel extends Model
 {
 	private $id = null;
 	private $usuario  = null;
