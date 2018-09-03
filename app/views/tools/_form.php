@@ -26,6 +26,14 @@
 	<div class="form-row">
 		<div class="col">
 			<div class="form-group">
+				<label for="price">Precio de compra: <span style="color:red;">*</span></label>
+				<input type="text" name="price" class="form-control" value="<?=$model->price;?>">
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col">
+			<div class="form-group">
 				<label for="">Estado herramienta: <span style="color:red;">*</span></label>
 				<div class="input-group">
 					<select name="es_her" id="es_her" class="form-control" required>

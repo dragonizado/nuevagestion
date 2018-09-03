@@ -10,6 +10,12 @@ define('APP', ROOT . 'app' . DIRECTORY_SEPARATOR);
 if (file_exists(ROOT . 'vendor/autoload.php')) {
     require ROOT . 'vendor/autoload.php';
 }
+if(file_exists(APP.'vendor/dompdf/autoload.inc.php')){
+	// include autoloader
+	require_once APP.'vendor/dompdf/autoload.inc.php';
+}
+
+
 
 require APP . 'config/config.php';
 require APP . 'config/dbcore.php';

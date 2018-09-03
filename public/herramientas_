@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-08-2018 a las 05:19:47
+-- Tiempo de generación: 03-09-2018 a las 06:11:59
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.11
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `herramientas`
 --
-CREATE DATABASE IF NOT EXISTS `herramientas` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `herramientas`;
 
 -- --------------------------------------------------------
 
@@ -57,6 +55,14 @@ CREATE TABLE `logs` (
   `modificado` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `logs`
+--
+
+INSERT INTO `logs` (`id`, `descripcion`, `user_id`, `tipo`, `creado`, `modificado`) VALUES
+(1, 'Ha registrado un tipo de herramienta', 3, 'creacion', '2018-09-02 20:53:18', '0000-00-00 00:00:00'),
+(2, 'Ha creado una herramienta', 3, 'creacion', '2018-09-02 20:53:58', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +84,7 @@ CREATE TABLE `tools` (
   `id` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `tipo` varchar(45) DEFAULT NULL,
+  `price` varchar(45) DEFAULT NULL,
   `fabricante` varchar(45) DEFAULT NULL,
   `modelo` varchar(45) DEFAULT NULL,
   `n_serie` varchar(11) DEFAULT NULL,
@@ -94,6 +101,28 @@ CREATE TABLE `tools` (
   `fecha_modificacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tools`
+--
+
+INSERT INTO `tools` (`id`, `nombre`, `tipo`, `price`, `fabricante`, `modelo`, `n_serie`, `n_inventario`, `tecnico`, `estado_herr`, `estado_posi`, `ubicacion_actual`, `fecha_compra`, `fecha_mto`, `fecha_salida`, `descripcion`, `creacion_registro`, `fecha_modificacion`) VALUES
+(1, 'destornilla', 'mano', '12.222', 'Abba', 'mt-32', '2545455', 2152, 0, 'Bueno', 'Adentro', 1, '2018-06-19', '2018-05-17', NULL, '', '2018-09-02', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tools_movements`
+--
+
+CREATE TABLE `tools_movements` (
+  `id` int(11) NOT NULL,
+  `tool_id` int(11) NOT NULL,
+  `description` varchar(150) DEFAULT NULL,
+  `date_mto` datetime DEFAULT NULL,
+  `date_in` datetime NOT NULL,
+  `date_out` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- --------------------------------------------------------
 
 --
@@ -104,6 +133,13 @@ CREATE TABLE `typetools` (
   `id` int(11) NOT NULL,
   `descripcion` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `typetools`
+--
+
+INSERT INTO `typetools` (`id`, `descripcion`) VALUES
+(1, 'mano');
 
 -- --------------------------------------------------------
 
@@ -161,6 +197,12 @@ ALTER TABLE `tools`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `tools_movements`
+--
+ALTER TABLE `tools_movements`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `typetools`
 --
 ALTER TABLE `typetools`
@@ -186,7 +228,7 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT de la tabla `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `statetools`
@@ -198,13 +240,19 @@ ALTER TABLE `statetools`
 -- AUTO_INCREMENT de la tabla `tools`
 --
 ALTER TABLE `tools`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tools_movements`
+--
+ALTER TABLE `tools_movements`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `typetools`
 --
 ALTER TABLE `typetools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
