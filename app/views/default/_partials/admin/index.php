@@ -161,7 +161,7 @@ $_mes_ = array("","Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","N
 			</div>
 		</div>
 		<div class="ta-c bdT w-100 p-20">
-			<a href="#" onclick="alert('Caracteristica no terminada');">Ver todas la notificaciones</a>
+			<a href="<?=URL?>public/index.php?url=reports/notification">Ver todas la notificaciones</a>
 		</div>
 	</div>
 </div>

@@ -10,14 +10,17 @@ class toolsController extends Controller
 	private $model_stateTools;
 	private $model_typeTools;
 	private $model_logs;
+	private $model_movements;
 	protected $nombrecompletos = null;
 	function __construct()
 	{
+		date_default_timezone_set('America/Bogota');
 		session_start();
 		$this->validateSesion();
 		$this->model = $this->cargarmodelo("tools");
 		$this->model_users = $this->cargarmodelo("users");
 		$this->model_logs = $this->cargarmodelo("logs");
+		$this->model_movements = $this->cargarmodelo("toolsMovements");
 		$this->model_locations = $this->cargarmodelo("locations");
 		$this->model_stateTools = $this->cargarmodelo("statetools");
 		$this->model_typeTools = $this->cargarmodelo("typetools");
@@ -37,6 +40,7 @@ class toolsController extends Controller
 			$this->model->__SET('stage','create');
 			$this->model->__SET('nombre',$_POST['name']);
 			$this->model->__SET('tipo',$_POST['type']);
+			$this->model->__SET('price',$_POST['price']);
 			$this->model->__SET('fabricante',$_POST['maker']);
 			$this->model->__SET('modelo',$_POST['model']);
 			$this->model->__SET('n_serie',$_POST['n_serie']);
@@ -151,6 +155,7 @@ class toolsController extends Controller
 					$this->model->__SET('stage','update');
 					$this->model->__SET('nombre',$_POST['name']);
 					$this->model->__SET('tipo',$_POST['type']);
+					$this->model->__SET('price',$_POST['price']);
 					$this->model->__SET('fabricante',$_POST['maker']);
 					$this->model->__SET('modelo',$_POST['model']);
 					$this->model->__SET('n_serie',$_POST['n_serie']);

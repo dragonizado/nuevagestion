@@ -10,6 +10,7 @@ class toolsModel extends Model
 	private $id = null;
 	private $nombre;
 	private $tipo = null;
+	private $price = null;
 	private $fabricante = null;
 	private $modelo = null;
 	private $n_serie = null;
@@ -54,6 +55,7 @@ class toolsModel extends Model
 		$this->__SET('id',$response->id);
 		$this->__SET('nombre',$response->nombre);
 		$this->__SET('tipo',$response->tipo);
+		$this->__SET('price',$response->price);
 		$this->__SET('fabricante',$response->fabricante);
 		$this->__SET('modelo',$response->modelo);
 		$this->__SET('n_serie',$response->n_serie);
@@ -74,9 +76,9 @@ class toolsModel extends Model
 
 	public function save(){
 		if($this->stage == "update"){
-			$this->sql = "UPDATE tools SET nombre = :nombre, tipo = :tipo, fabricante = :fabricante, modelo = :modelo, n_serie = :n_serie, n_inventario = :n_inventario, tecnico = :tecnico, estado_herr = :estado_herr, estado_posi = :estado_posi, ubicacion_actual = :ubicacion_actual, fecha_compra = :fecha_compra, fecha_mto = :fecha_mto, fecha_salida = :fecha_salida, descripcion = :descripcion, creacion_registro = :creacion_registro, fecha_modificacion = :fecha_modificacion WHERE id=:id";
+			$this->sql = "UPDATE tools SET nombre = :nombre, tipo = :tipo, price = :price, fabricante = :fabricante, modelo = :modelo, n_serie = :n_serie, n_inventario = :n_inventario, tecnico = :tecnico, estado_herr = :estado_herr, estado_posi = :estado_posi, ubicacion_actual = :ubicacion_actual, fecha_compra = :fecha_compra, fecha_mto = :fecha_mto, fecha_salida = :fecha_salida, descripcion = :descripcion, creacion_registro = :creacion_registro, fecha_modificacion = :fecha_modificacion WHERE id=:id";
 		}else if($this->stage == "create"){
-			$this->sql = "INSERT INTO tools (id,nombre,tipo,fabricante,modelo,n_serie,n_inventario,tecnico,estado_herr,estado_posi,ubicacion_actual,fecha_compra,fecha_mto,fecha_salida,descripcion,creacion_registro,fecha_modificacion) VALUES (:id,:nombre,:tipo,:fabricante,:modelo,:n_serie,:n_inventario,:tecnico,:estado_herr,:estado_posi,:ubicacion_actual, :fecha_compra,:fecha_mto,:fecha_salida,:descripcion,:creacion_registro,:fecha_modificacion)";
+			$this->sql = "INSERT INTO tools (id,nombre,tipo,price,fabricante,modelo,n_serie,n_inventario,tecnico,estado_herr,estado_posi,ubicacion_actual,fecha_compra,fecha_mto,fecha_salida,descripcion,creacion_registro,fecha_modificacion) VALUES (:id,:nombre,:tipo,:price,:fabricante,:modelo,:n_serie,:n_inventario,:tecnico,:estado_herr,:estado_posi,:ubicacion_actual, :fecha_compra,:fecha_mto,:fecha_salida,:descripcion,:creacion_registro,:fecha_modificacion)";
 		}else{
 			return "no esta entrando al if";
 		}
@@ -86,6 +88,7 @@ class toolsModel extends Model
 			':id'=>$this->id,
 			':nombre'=>$this->nombre,
 			':tipo'=>$this->tipo,
+			':price'=>$this->price,
 			':fabricante'=>$this->fabricante,
 			':modelo'=>$this->modelo,
 			':n_serie'=>$this->n_serie,
@@ -139,6 +142,7 @@ class toolsModel extends Model
 		$this->id = null;
 		$this->nombre = null;
 		$this->tipo = null;
+		$this->price = null;
 		$this->fabricante = null;
 		$this->modelo = null;
 		$this->n_serie = null;

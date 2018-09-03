@@ -1,0 +1,218 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 08-08-2018 a las 05:19:47
+-- Versión del servidor: 10.1.28-MariaDB
+-- Versión de PHP: 7.1.11
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `herramientas`
+--
+CREATE DATABASE IF NOT EXISTS `herramientas` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `herramientas`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `locations`
+--
+
+CREATE TABLE `locations` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `locations`
+--
+
+INSERT INTO `locations` (`id`, `descripcion`) VALUES
+(1, 'En almacen');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `logs`
+--
+
+CREATE TABLE `logs` (
+  `id` int(11) NOT NULL,
+  `descripcion` text NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `tipo` varchar(45) DEFAULT NULL,
+  `creado` datetime NOT NULL,
+  `modificado` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `statetools`
+--
+
+CREATE TABLE `statetools` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tools`
+--
+
+CREATE TABLE `tools` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(60) NOT NULL,
+  `tipo` varchar(45) DEFAULT NULL,
+  `fabricante` varchar(45) DEFAULT NULL,
+  `modelo` varchar(45) DEFAULT NULL,
+  `n_serie` varchar(11) DEFAULT NULL,
+  `n_inventario` int(11) DEFAULT NULL,
+  `tecnico` int(5) DEFAULT NULL,
+  `estado_herr` varchar(15) NOT NULL,
+  `estado_posi` varchar(15) NOT NULL,
+  `ubicacion_actual` int(5) NOT NULL,
+  `fecha_compra` date NOT NULL,
+  `fecha_mto` date DEFAULT NULL,
+  `fecha_salida` date DEFAULT NULL,
+  `descripcion` text,
+  `creacion_registro` date NOT NULL,
+  `fecha_modificacion` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `typetools`
+--
+
+CREATE TABLE `typetools` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `usuario` varchar(45) NOT NULL,
+  `contra` varchar(45) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
+  `correo` varchar(100) DEFAULT NULL,
+  `documento` int(15) NOT NULL,
+  `estado` varchar(10) NOT NULL DEFAULT 'ACTIVO',
+  `rol_id` int(11) NOT NULL DEFAULT '2'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `usuario`, `contra`, `nombre`, `apellido`, `correo`, `documento`, `estado`, `rol_id`) VALUES
+(1, 'superadmin', '25f9e794323b453885f5181f1b624d0b', 'Super', 'Administrador', 'superadmin@braincoding.co', 123456789, 'ACTIVO', 1),
+(2, 'prueba', '25f9e794323b453885f5181f1b624d0b', 'prueba', 'sistemas', 'prueba@prueba.com', 123456782, 'ACTIVO', 3),
+(3, 'admin', '25f9e794323b453885f5181f1b624d0b', 'Administrador', 'Sistema', 'admin@admin.com', 123456783, 'ACTIVO', 2);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `locations`
+--
+ALTER TABLE `locations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `statetools`
+--
+ALTER TABLE `statetools`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tools`
+--
+ALTER TABLE `tools`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `typetools`
+--
+ALTER TABLE `typetools`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `locations`
+--
+ALTER TABLE `locations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `statetools`
+--
+ALTER TABLE `statetools`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tools`
+--
+ALTER TABLE `tools`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `typetools`
+--
+ALTER TABLE `typetools`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
