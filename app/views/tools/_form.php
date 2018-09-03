@@ -21,6 +21,16 @@
 				<label for="">Fecha de compra:</label>
 				<input type="date" name="f_C"	class="form-control" value="<?=$model->fecha_compra;?>">
 			</div>
+			
+		</div>
+		
+	</div>
+	<div class="form-row">
+		<div class="col">
+			<div class="form-group">
+				<label for="">Costo:</label>
+				<input type="number" name="C_F"	class="form-control" value="">
+			</div>
 		</div>
 	</div>
 	<div class="form-row">

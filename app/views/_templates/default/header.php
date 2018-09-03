@@ -393,7 +393,7 @@
 									
 								<ul class="dropdown-menu fsz-sm">
 									<li>
-										<a href="#" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+										<a href="<?= URL;?>public/index.php?url=config/index" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
 											<i class="ti-settings mR-10"></i> 
 											<span>Configuración</span>
 										</a>
@@ -422,5 +422,6 @@
 						</ul>
 					</div>
 				</div>
-				<main class="main-content bgc-grey-100">
+				<!-- <main class="main-content bgc-grey-100"> -->
+				<main class="main-content " style="background-color:#eaebed;">
 					<div id="mainContent">

@@ -73,6 +73,7 @@ class toolsController extends Controller
 	}
 
 	public function register(){
+		$this->pageName="Tecnicos";
 		if(isset($_POST['btn-register'])){
 			$this->model->searchById($_POST['Herramienta']);
 			$this->model->__SET('stage','update');
@@ -107,6 +108,36 @@ class toolsController extends Controller
 				header("location: ".URL."public/index.php?url=tools/register");
 			}
 		}
+	}
+
+	public function tools(){
+		
+		$this->view("tools/tools",array("tbodyAll"=>$this->model->getAllTools()));
+	}
+
+	public function multitools(){
+		if (isset($_POST['btn_register'])) {
+			$locations = $_POST['opt_locations'];
+			
+			foreach ($_POST['tools'] as $key => $tool) {
+				$this->model->searchById($tool);
+				$this->model->__SET('stage','update');
+				$this->model->__SET('ubicacion_actual',$_POST['opt_locations'][$key]);
+				$this->model->__SET('tecnico',$_SESSION['id']);
+				if ($_POST['opt_locations'][$key] == "1") {
+					$this->model->__SET('estado_posi','Adentro');
+				}else{
+					$this->model->__SET('estado_posi','Afuera');
+					$this->model->__SET('fecha_salida',date("Y-m-d"));
+				}
+				if($this->model->save()){
+					$this->model_logs->register($_SESSION['id'],"asignacion","Se ha asignado una herramienta");
+				}
+			}
+			header("location: ".URL."public/index.php?url=tools/register");
+			exit(0);
+		}
+		header("location: ".URL."public/index.php?url=tools/tools");
 	}
 
 	public function edit(){
