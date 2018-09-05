@@ -87,13 +87,20 @@ class defaultController extends controller{
 			$this->model_user->__SET("usuario",$_POST['nickname']);
 			$this->model_user->__SET("documento",$_POST['document']);
 			$this->model_user->__SET("correo",$_POST['email']);
+			if (isset($_POST['send_email'])) {
+				$this->model_user->__SET("send_email",true);
+			}else{
+				$this->model_user->__SET("send_email",false);
+			}
 			$this->model_user->__SET("nombre",$_POST['firtsname']);
 			$this->model_user->__SET("apellido",$_POST['secondname']);
 			$this->model_user->__SET("rol_id",$_POST['rol']);
 			$this->model_user->__SET("estado",$_POST['state']);
 			$this->model_user->__SET("contra",md5($_POST['password']));
 			if($this->model_user->create()){
+				//poner aqui el envio de correo
 				echo $_POST['document']."  Creado correctamente";
+				header("location: ".URL."public/index.php?url=default/signin");
 			}
 
 		}
@@ -102,6 +109,7 @@ class defaultController extends controller{
 		$nombre = '';
 		$apellido = '';
 		$correo = '';
+		$send_email = '';
 		$documento = '';
 		$estado = '';
 		$rol = '';
@@ -115,6 +123,11 @@ class defaultController extends controller{
 				$this->model_user->__SET("usuario",$_POST['nickname']);
 				$this->model_user->__SET("documento",$_POST['document']);
 				$this->model_user->__SET("correo",$_POST['email']);
+				if (isset($_POST['send_email'])) {
+					$this->model_user->__SET("send_email",true);
+				}else{
+					$this->model_user->__SET("send_email",false);
+				}
 				$this->model_user->__SET("nombre",$_POST['firtsname']);
 				$this->model_user->__SET("apellido",$_POST['secondname']);
 				$this->model_user->__SET("rol_id",$_POST['rol']);
@@ -127,6 +140,7 @@ class defaultController extends controller{
 				$user_m = $this->model_user->save();
 				if($user_m){
 					$this->formErrors = "Si se Actualizó";
+					header("location: ".URL."public/index.php?url=default/signin");
 				}
 
 			}else{
@@ -139,6 +153,7 @@ class defaultController extends controller{
 					$nombre = $user_m->nombre;
 					$apellido = $user_m->apellido;
 					$correo = $user_m->correo;
+					$send_email = $user_m->send_email;
 					$documento = $user_m->documento;
 					$estado = $user_m->estado;
 					$rol = $user_m->rol_id;
@@ -156,7 +171,7 @@ class defaultController extends controller{
 				$table .= '<tr>';
 				$table .= '<td>'.$user->nombre.' '.$user->apellido.'</td>';
 				$table .= '<td>'.$user->documento.'</td>';
-				$table .= '<td>'.$user->correo.'</td>';
+				$table .= '<td style="width:200px;  word-break: break-all;">'.$user->correo.'</td>';
 				if ($user->rol_id == "1") {
 					$table .= '<td>Super Admin</td>';
 				}else if($user->rol_id == "2"){
@@ -165,6 +180,11 @@ class defaultController extends controller{
 					$table .= '<td>Tecnico</td>';
 				}
 				$table .= '<td>'.$user->estado.'</td>';
+				if($user->send_email == 0){
+					$table .= '<td class="c-red-500">No Autorizado</td>';
+				}else if($user->send_email == 1){
+					$table .= '<td class="c-green-500">Autorizado</td>';
+				}
 				$table .= '<td><a href="'.URL.'public/index.php?url=default/signin&id='.$user->id.'"><button class="btn btn-info">Editar</button></a></td>';
 				$table .= '</tr>';
 			}
@@ -175,6 +195,7 @@ class defaultController extends controller{
 			"nombre" => $nombre,
 			"apellido" => $apellido,
 			"correo" => $correo,
+			"send_email" => $send_email,
 			"documento" => $documento,
 			"estado" => $estado,
 			"rol" => $rol,

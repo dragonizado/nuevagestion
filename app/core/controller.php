@@ -31,6 +31,12 @@
 			return new $nombre_modelo($this->db);
 		}
 
+		public function cargarComponente($n_c){
+			$nombre_componente = $n_c."Component";
+			require APP."components/".$nombre_componente.".php";
+			return new $nombre_componente();
+		}
+
 		public function view($view){
 			$folderf = '';
 			$default_folder = _DEFAULTFOLDER_TEMPLATE_;

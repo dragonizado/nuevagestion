@@ -10,6 +10,7 @@ class usersModel extends Model
 	private $nombre  = null;
 	private $apellido  = null;
 	private $correo  = null;
+	private $send_email = false;
 	private $documento  = null;
 	private $estado  = null;
 	private $rol_id  = null;
@@ -36,7 +37,7 @@ class usersModel extends Model
 	}
 
 	public function create(){
-		$sql = "INSERT INTO users (usuario,contra,nombre,apellido,correo,documento,estado,rol_id) VALUES (:usuario,:contra,:nombre,:apellido,:correo,:documento,:estado,:rol_id)";
+		$sql = "INSERT INTO users (usuario,contra,nombre,apellido,correo,send_email,documento,estado,rol_id) VALUES (:usuario,:contra,:nombre,:apellido,:correo,:send_email,:documento,:estado,:rol_id)";
 		$query = $this->_db->prepare($sql);
 		$params = array(
 			':usuario'=>$this->usuario,
@@ -44,6 +45,7 @@ class usersModel extends Model
 			':nombre'=>$this->nombre,
 			':apellido'=>$this->apellido,
 			':correo'=>$this->correo,
+			':send_email'=>$this->send_email,
 			':documento'=>$this->documento,
 			':estado'=>$this->estado,
 			':rol_id'=>$this->rol_id,
@@ -98,6 +100,7 @@ class usersModel extends Model
 		$this->__SET('nombre',$response->nombre);
 		$this->__SET('apellido',$response->apellido);
 		$this->__SET('correo',$response->correo);
+		$this->__SET('send_email',$response->send_email);
 		$this->__SET('documento',$response->documento);
 		$this->__SET('estado',$response->estado);
 		$this->__SET('rol_id',$response->rol_id);
@@ -128,7 +131,7 @@ class usersModel extends Model
 	}
 
 	public function save(){
-		$sql = "UPDATE users SET usuario = :user, contra = :pass, nombre = :name, apellido = :lastname, correo = :email, documento = :document, estado = :state, rol_id = :rol WHERE id = :id";
+		$sql = "UPDATE users SET usuario = :user, contra = :pass, nombre = :name, apellido = :lastname, correo = :email, send_email = :send_email, documento = :document, estado = :state, rol_id = :rol WHERE id = :id";
 		$query = $this->_db->prepare($sql);
 		$parametros = array(
 			":id"=>$this->id, 
@@ -137,6 +140,7 @@ class usersModel extends Model
 			":name"=>$this->nombre, 
 			":lastname"=>$this->apellido, 
 			":email"=>$this->correo, 
+			":send_email"=>$this->send_email, 
 			":document"=>$this->documento, 
 			":state"=>$this->estado, 
 			":rol"=>$this->rol_id, 
@@ -161,6 +165,7 @@ class usersModel extends Model
 			':nombre'=>$value,
 			':apellido'=>$value,
 			':correo'=>$value,
+			':send_email'=>$value,
 			':documento'=>$value,
 		);
 		return $query->execute($params);

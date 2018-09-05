@@ -15,6 +15,7 @@
 						<th>correo</th>
 						<th>Rol</th>
 						<th>Estado</th>
+						<th>Notificaciones</th>
 						<th>Opciones</th>
 					</tr>
 				</thead>

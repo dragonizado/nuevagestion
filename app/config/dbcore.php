@@ -4,6 +4,7 @@
 */
 
 define('_DEFAULTFOLDER_TEMPLATE_',$templatefolder);
+define('APP_NAME',$appName);
 define('APIKEY',$apikey);
 
 // se define un entorno (desarrollo o producción)

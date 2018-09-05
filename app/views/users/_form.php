@@ -56,6 +56,10 @@
 				<option value="DESHABILITADO" <?php echo ($id != '' && $estado == 'DESHABILITADO' )?'selected="selected"':''; ?> >Deshabilitado</option>
 			</select>
 		</div>
+		<div class="form-group col-md-12 <?= ($id != '' && $rol == '3')?'hidden':''; ?> <?= ($id == '' && $rol == '')?'hidden':''; ?>" id="email_sender">
+			<input type="checkbox" name="send_email" id="send_email" <?= ($send_email == true)?'checked':'';?>>
+			<label for="send_email">Enviar notificaciones del sistema a este usuario?</label>
+		</div>
 	</div>
 	<?php if ($id == ''): ?>
 		<button type="submit" class="btn btn-primary" name="btn-register">Registrar</button>
@@ -64,3 +68,15 @@
 		<a href="<?=URL?>public/index.php?url=default/signin" class="btn btn-danger">Cancelar</a>
 	<?php endif ?>
 	</form>
+
+	<script>
+		$('#inputRol').change(function(){
+			let obj = $("#inputRol option:selected");
+			if(obj.val() != '3'){
+				$("#email_sender").removeClass("hidden");
+			}else{
+				$("#email_sender").addClass("hidden");
+				$("#send_email").prop('checked',false);
+			}
+		});
+	</script>

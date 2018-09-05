@@ -2,7 +2,7 @@
 /*
 * Dragonizado 2018
 */
-$appName = "";
+$appName = "SSI SECURITY";
 
 //elegir la carpeta de plantillas por defecto
 $templatefolder = "default";
@@ -16,6 +16,7 @@ $dbname = "herramientas";//ejm mibd
 $dbuser = "root";//ejm mi dbuser
 $dbpass = "";//ejm mi password
 
+// Conexion del api
 $apikey = "1e02294501851d1ad6ee9d2dcea95707";
 
  ?>
