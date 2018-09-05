@@ -21,8 +21,8 @@
     		<h4 class="fw-300 c-grey-900 mB-40">Inciar Sesión</h4>
     		<form method="post">
     			<div class="form-group">
-    				<label class="text-normal text-dark">Correo</label> 
-    				<input type="email" id="username" name="username" class="form-control" placeholder="johndoe@contoso.com"></div>
+    				<label class="text-normal text-dark">Usuario</label> 
+    				<input type="text" id="username" name="username" class="form-control" placeholder="usuario o correo"></div>
     				<div class="form-group">
     					<label class="text-normal text-dark">Contraseña</label> 
     					<input type="password" id="password" name="password" class="form-control" placeholder="Contraseña">

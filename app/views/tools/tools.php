@@ -39,7 +39,8 @@
 		</div>
 	</div>
 </div>
-
+<!-- modales -->
+<?php include "_modals.php"; ?>
 <script>
 	$('.tools_check').click(function(){
 		let obj = $(this);

@@ -68,7 +68,7 @@ class toolsController extends Controller
 			
 			if($this->model->save()){
 				$this->email_component->__SET('email_title','Creacion - Control de Herramientas');
-				$this->email_component->__SET('email_Body','<p>'.$_SESSION['nombre'].''.$_SESSION['apellido'].' Ha creado una herramienta.</p>');
+				$this->email_component->__SET('email_Body','<p>'.$this->nombrecompleto.' Ha creado una herramienta.</p>');
 				$response = $this->email_component->loadUsers($this->model_users)->SendEmail();
 				$this->model_logs->register($_SESSION['id'],"creacion","Ha creado una herramienta");
 			}
@@ -102,7 +102,7 @@ class toolsController extends Controller
 			}
 			if($this->model->save()){
 				$this->email_component->__SET('email_title','Asignacion - Control de Herramientas');
-				$this->email_component->__SET('email_Body','<p>'.$_SESSION['nombre'].''.$_SESSION['apellido'].' Se ha asignado una herramienta.</p>');
+				$this->email_component->__SET('email_Body','<p>'.$this->nombrecompleto.' Se ha asignado una herramienta.</p>');
 				$response = $this->email_component->loadUsers($this->model_users)->SendEmail();
 				$this->model_logs->register($_SESSION['id'],"asignacion","Se ha asignado una herramienta");
 			}
@@ -123,7 +123,7 @@ class toolsController extends Controller
 			$this->model->__SET('estado_posi','Adentro');
 			if($this->model->save()){
 				$this->email_component->__SET('email_title','Quitar - Control de Herramientas');
-				$this->email_component->__SET('email_Body','<p>'.$_SESSION['nombre'].''.$_SESSION['apellido'].' Ha dejado una herramienta.</p>');
+				$this->email_component->__SET('email_Body','<p>'.$this->nombrecompleto.' Ha dejado una herramienta.</p>');
 				$response = $this->email_component->loadUsers($this->model_users)->SendEmail();
 				$this->model_logs->register($_SESSION['id'],"desasignacion","Ha dejado una herramienta");
 				header("location: ".URL."public/index.php?url=tools/register");
@@ -132,7 +132,7 @@ class toolsController extends Controller
 	}
 
 	public function tools(){
-		
+		$this->pageName="Gestionar Herramientas";
 		$this->view("tools/tools",array("tbodyAll"=>$this->model->getAllTools()));
 	}
 
@@ -158,11 +158,11 @@ class toolsController extends Controller
 				if($this->model->save()){
 					if($_SESSION['rol'] == '3'){
 						$this->email_component->__SET('email_title','Creacion - Control de Herramientas');
-						$this->email_component->__SET('email_Body','<p>'.$_SESSION['nombre'].''.$_SESSION['apellido'].' Se ha asignado una herramienta.</p>');
+						$this->email_component->__SET('email_Body','<p>'.$this->nombrecompleto.' Se ha asignado la herramienta con el identificador '.$tool.'.</p>');
 						$this->model_logs->register($_SESSION['id'],"asignacion","Se ha asignado una herramienta");
 					}else{
 						$this->email_component->__SET('email_title','Creacion - Control de Herramientas');
-						$this->email_component->__SET('email_Body','<p>'.$_SESSION['nombre'].''.$_SESSION['apellido'].' Ha asignado una herramienta a un Ténico.</p>');
+						$this->email_component->__SET('email_Body','<p>'.$this->nombrecompleto.' Ha asignado una herramienta a un Técnico.</p>');
 						$this->model_logs->register($_SESSION['id'],"asignacion","Ha asignado una herramienta a un Técnico");
 					}
 					$this->email_component->loadUsers($this->model_users)->SendEmail();

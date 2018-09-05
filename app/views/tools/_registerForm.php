@@ -16,7 +16,7 @@
 		<div class="col">
 			<div class="form-group">
 				<label for="">Ubicación</label>
-				<select name="ubicacion" id="" class="form-control" required>
+				<select name="ubicacion" id="Current_location" class="form-control" required>
 					<option value="" disabled selected>Seleccione una ubicación</option>
 					<?php 
 						foreach ($locations as $key => $location) {

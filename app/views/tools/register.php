@@ -10,14 +10,14 @@
 		<div class="bgc-white p-20 bd">
 			<h3><i class="fa fa-suitcase" aria-hidden="true"></i> Ver herramientas asignadas</h3>
 			<hr>
-			<ul class="nav nav-tabs">
+			<!-- <ul class="nav nav-tabs">
 			  <li class="nav-item">
 			    <a class="nav-link active" data-toggle="tab" href="#content-one">Herramientas Asignadas</a>
 			  </li>
 			  <li class="nav-item">
 			    <a class="nav-link" data-toggle="tab" href="#content-two">Todas las Herramientas</a>
 			  </li>
-			</ul>
+			</ul> -->
 
 			<div class="tab-content">
 					<div id="content-one" role="tabpanel" class="table-responsive tab-pane fade show active">
@@ -46,10 +46,12 @@
 						</table>
 					</div>
 				
-				<div id="content-two" class="tab-pane fade" role="tabpanel">
+				<!-- <div id="content-two" class="tab-pane fade" role="tabpanel">
 					
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
 </div>
+<!-- modales -->
+<?php include "_modals.php"; ?>
